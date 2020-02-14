@@ -133,7 +133,6 @@ const buildScripts = function(inputPath, outputPath) {
 const startServer = function () {
   if (!settings.server) return done;
 
-  // paths.server
   browserSync.init({
     server: {
       baseDir: paths.server
@@ -188,6 +187,7 @@ exports.adminWatch = series(
   )
 );
 
+// Watch for changes in both user and admin pages
 exports.watch = series(
   parallel(
     userWatchSource,
