@@ -151,6 +151,8 @@ const reloadBrowser = function (done) {
 
 // Watch for changes in user pages
 const userWatchSource = function(done) {
+  if (!settings.user) return done;
+
   const watcher = watch(paths.user.input, series(parallel(userWatchSource, reloadBrowser)));
   watcher.on('all', () => {
     buildStyles(paths.user.styles.input, paths.user.styles.output);
@@ -170,6 +172,8 @@ exports.userWatch = series(
 
 // Watch for changes in admin pages
 const adminWatchSource = function(done) {
+  if (!settings.admin) return done;
+
   const watcher = watch(paths.admin.input, series(parallel(adminWatchSource, reloadBrowser)));
   watcher.on('all', () => {
     buildStyles(paths.admin.styles.input, paths.admin.styles.output);
